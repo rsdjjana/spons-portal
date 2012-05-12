@@ -73,7 +73,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'portal.urls'
+ROOT_URLCONF = 'spons-portal.urls'
 
 
 

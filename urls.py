@@ -1,14 +1,17 @@
-from django.conf.urls.defaults import patterns, include, url
 
+from django.conf.urls.defaults import*
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
+
+
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'portal.views.login', name='login'),
-    url(r'^home/$', 'portal.views.home', name='home'),
-    url(r'^logout/$', 'portal.views.logout', name='logout'),
+    url(r'^login/$', 'portal.views.log_in', name='login'),
+    url(r'^$', 'portal.views.home', name='home'),
+    url(r'^logout/$', 'portal.views.log_out', name='logout'),
+	url(r'^register/$','portal.views.register',name='register'),
     # url(r'^portal/', include('portal.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

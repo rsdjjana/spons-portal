@@ -1,3 +1,2 @@
-
-import local_settings.py
-form local_settings import*
+import local_settings
+from local_settings import*
