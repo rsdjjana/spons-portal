@@ -1,0 +1,12 @@
+{% extends "login.html" %}
+{% block title %} Edit category details {% endblock %}
+{% block body %}
+<form action='' method='POST'>
+	{% csrf_token %}
+	<p>Name:<input type="text" name='name' value="{{category.name}}"></p>
+	<p>Info:<textarea name='info' rows='10' column='100'>{{category.info}}</textarea></p>
+	<input type='submit' value='Submit'>
+</form>
+{% endblock %}
+{% block end %}<a href='/'>back</a>{% endblock %}
+	

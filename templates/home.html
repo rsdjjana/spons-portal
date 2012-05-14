@@ -1,4 +1,35 @@
 <html>
-Hello!
- <a href="/logout">LogOut</a><br/>
+<center> <h1> Welcome to Shaastra 2013 Spons Portal </h1> </center>
+
+<h3><b> Categories</b></h3>
+<table border='1'>
+	<tr>
+		<th>Category name</th>
+		<th>Category info</th>
+	{% if logged_in %}		
+		<th>Edit</th>
+		<th>Delete</th>
+	{% endif %}
+	</tr>
+{% for category in categories %}
+	<tr>
+		<td><a href='/category/{{category.id}}'>{{category}}</a></td>
+		<td>{{category.info}}</td>
+	{% if logged_in %}
+		<td><a href='/edit_category/{{category.id}}'>Edit</a></td>
+		<td><a href='/delete_category/{{category.id}}'>Delete</a></td>
+	{% endif %}
+	</tr> 
+{% endfor %}
+</table>
+{% if logged_in %}
+		<a href='/addcategory'>Add Category</a>
+	</br>
+	{% endif %}
+<hr>
+
+{% if logged_in %}
+<a href="/logout">LogOut</a><br/> 
+{% endif %}
+
 </html>

@@ -3,7 +3,7 @@
 <b><center><h2>{% block title %}LOG IN{% endblock %}</h2></b><br/></center>
 </head>
 <body>
-
+{% block body %}
 <form action="" method="POST">
     {% csrf_token %}
     <table>
@@ -12,6 +12,7 @@
     <input type="submit" value="Submit">
 </form>	
 <hr>
+{% endblock %}
 {% block end %}
 <a href='/register'><h3>Register</h3></a>
 {% endblock %}

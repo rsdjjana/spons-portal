@@ -1,0 +1,20 @@
+{% extends "login.html" %}
+{% block title %} Edit event's details {% endblock %}
+{% block body %}
+<form action='' method='POST'>
+	{% csrf_token %}
+	<p>Name:<input type="text" name='name' value="{{event.name}}"></p>
+	<p>Info:<textarea name='info' rows='10' column='100'>{{event.info}}</textarea></p>
+	<p>status:<select name="status" >
+	<option value="present status">{{event.status}}</option>
+	{% if present_status %}
+		<option value="Available">Available</option>
+	{% else %}
+		<option value="Sold">Sold</option>
+	{% endif %}
+	</select>
+	</p>
+	<input type='submit' value='Submit'>
+</form>
+{% endblock %}
+{% block end %} <a href='/category/{{categoryid}}'>back</a>{% endblock %}
