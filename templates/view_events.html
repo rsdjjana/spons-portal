@@ -2,6 +2,9 @@
 {% block title %}{{category}}{% endblock %}
 {% block body %}
 {{category.info}}
+{% for category1_image in category_image %}
+<img src="{{MEDIA_URL}}{{category1_image.name}}" height='100px' width='200px' />
+{% endfor %}
 <hr>
 <h3><center>Events under {{category}}</center></h3>
 <table border='1'>
@@ -16,7 +19,7 @@
 </tr>
 {% for event in events %}
 <tr>
-<td>{{event.name}}</td>
+<td><a href='/event/image/{{category.id}}/{{event.id}}'>{{event.name}}</a></td>
 <td>{{event.info}}</td>
 <td>{{event.status}}</td>
 {% if logged_in %}

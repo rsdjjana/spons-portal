@@ -1,15 +1,16 @@
 {% extends "login.html" %}
-{% block title %} Add Category {% endblock %}
+{% block title %} Edit Category image{% endblock %}
 {% block body %}
-<form action="" method="POST">
+<form enctype="multipart/form-data" action="" method="POST">
     {% csrf_token %}
     <table>
         {{form.as_table}}
     </table>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Add Image">
 </form>	
 <hr>
 {% endblock %}
 {% block end %} </hr> 
 <a href='/'>back</a>
 {% endblock %}
+	

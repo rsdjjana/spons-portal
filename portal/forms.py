@@ -15,7 +15,7 @@ class RegisterForm(forms.Form):
 class AddCategoryForm(forms.Form):
 	name=forms.CharField()
 	info=forms.CharField(widget=forms.Textarea)
-
+	
 STATUS_CHOICES=(
 ('Sold','Sold'),
 ('Available','Available'),
@@ -25,4 +25,7 @@ class AddEventForm(forms.Form):
 	name=forms.CharField()
 	info=forms.CharField(widget=forms.Textarea)
 	status=forms.ChoiceField(choices=STATUS_CHOICES)
+
+class AddImageForm(forms.Form):
+	image=forms.ImageField(required=False)
 

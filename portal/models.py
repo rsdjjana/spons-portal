@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.files.storage import FileSystemStorage
 # Create your models here.
 
 class UserProfile(models.Model):
@@ -25,4 +26,17 @@ class Event(models.Model):
 	def __unicode__(self):
 		return self.name
 
+class CategoryImage(models.Model):
+	name=models.CharField(max_length=1000)
+	image=models.ImageField(upload_to='/media/photos/',null=True,blank=True)
+	category=models.ForeignKey(Category)
+	def __unicode__(self):
+		return self.name
+
+class EventImage(models.Model):
+	name=models.CharField(max_length=1000)
+	image=models.ImageField(upload_to='/media/photos/',null=True,blank=True)
+	event=models.ForeignKey(Event)
+	def __unicode__(self):
+		return self.name
 

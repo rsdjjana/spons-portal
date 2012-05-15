@@ -1,0 +1,16 @@
+{% extends "login.html" %}
+{% block title %} Add image for {{event}}{% endblock %}
+{% block body %}
+
+<form enctype="multipart/form-data" action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+    <input type="submit" value="Add Image">
+</form>	
+<hr>
+{% endblock %}
+{% block end %} </hr> 
+<a href='/category/{{categoryid}}'>back</a>
+{% endblock %}

@@ -6,7 +6,7 @@
 	<p>Name:<input type="text" name='name' value="{{event.name}}"></p>
 	<p>Info:<textarea name='info' rows='10' column='100'>{{event.info}}</textarea></p>
 	<p>status:<select name="status" >
-	<option value="present status">{{event.status}}</option>
+	<option value="{{event.status}}">{{event.status}}</option>
 	{% if present_status %}
 		<option value="Available">Available</option>
 	{% else %}
