@@ -1,11 +1,13 @@
 {% extends "login.html" %}
 {% block title %} {{event}} {% endblock %}
 {% block body %}
-{{event.info}}
+<center>{{event.info}}</center>
 {% for images in event_image %}
 </br>
 <img src="{{MEDIA_URL}}{{images.name}}" height='100px' width='200px' />
 {% endfor %}
+</br>
+<b>Status:</b>{{event.status}}
 {% endblock %}
 {% block end %}
  <hr> 

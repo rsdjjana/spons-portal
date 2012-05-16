@@ -1,7 +1,8 @@
 {% extends "login.html" %}
 {% block title %}{{category}}{% endblock %}
 {% block body %}
-{{category.info}}
+<center>{{category.info}}</center>
+</br>
 {% for category1_image in category_image %}
 <img src="{{MEDIA_URL}}{{category1_image.name}}" height='100px' width='200px' />
 {% endfor %}
@@ -10,7 +11,6 @@
 <table border='1'>
 <tr>
 <th>Event name</th>
-<th>Event info</th>
 <th>Event status</th>
 {% if logged_in %}
 <th>Edit</th>
@@ -20,7 +20,6 @@
 {% for event in events %}
 <tr>
 <td><a href='/event/image/{{category.id}}/{{event.id}}'>{{event.name}}</a></td>
-<td>{{event.info}}</td>
 <td>{{event.status}}</td>
 {% if logged_in %}
 <td><a href='/edit_event/{{category.id}}/{{event.id}}'>edit</a></td>
