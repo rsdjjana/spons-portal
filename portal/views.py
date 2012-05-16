@@ -45,7 +45,10 @@ def register(request):
 	else:
 		form=RegisterForm()
 	return render_to_response("register.html",locals(),context_instance=RequestContext(request))
-
+"""
+	The home page will show all the categories for the sponsor
+	The cores will be able to add categories, (name, info, photo), edit and delete stuff related to category there
+"""
     
 def home(request):
 	logged_in=False
@@ -54,12 +57,19 @@ def home(request):
 	categories=Category.objects.all()
 	return render_to_response("home.html",{'categories':categories,'logged_in':logged_in},context_instance=RequestContext(request))
 
+"""
+	To save the image file to the respective directory
+	#what is the 'wb' there for?
+"""
 def save_file(file,path=''):
 	filename = file._get_name()
 	fd = open('%s%s' % (MEDIA_ROOT,str(filename)), 'wb')
 	for chunk in file.chunks():
 		fd.write(chunk)
 	fd.close()
+"""
+	function to add a category, (name, info)
+"""
 
 def add_category(request):
 	if request.user.is_authenticated():
@@ -77,7 +87,9 @@ def add_category(request):
 		return render_to_response("add_category.html",locals(),context_instance=RequestContext(request))
 	else:
 		raise Http404()
-
+"""
+	To add the respective categories image(required=False)
+"""
 
 def add_category_image(request,categoryid):
 	if request.user.is_authenticated():
@@ -98,6 +110,10 @@ def add_category_image(request,categoryid):
 	else:
 		raise Http404()
 
+"""
+	To edit category info(name,info)
+	The previous data will be shown in the edit form during editing
+"""
 
 def edit_category(request,categoryid):
 	if request.user.is_authenticated():
@@ -116,6 +132,9 @@ def edit_category(request,categoryid):
 		return render_to_response("edit_category.html",locals(),context_instance=RequestContext(request))
 	else:
 		raise Http404()
+"""
+	To edit(change/add if not added before) the category image
+"""
 
 def edit_category_image(request,categoryid):
 	if request.user.is_authenticated():
@@ -147,6 +166,9 @@ def edit_category_image(request,categoryid):
 			
 	else:
 		raise Http404()
+"""
+	To delete the category model instance
+"""
 	
 
 def delete_category(request,categoryid):
@@ -158,6 +180,10 @@ def delete_category(request,categoryid):
 		return HttpResponseRedirect('/')
 	else:
 		raise Http404()
+"""
+	To veiw all the event under a particular category selected
+	The cores will be able to add,edit,delete event information
+"""
 
 def view_events(request,categoryid):
 	logged_in=False
@@ -173,7 +199,9 @@ def view_event_image(request,categoryid,eventid):
 	event_image=EventImage.objects.filter(event=event)
 	return render_to_response("view_event_details.html",locals(),context_instance=RequestContext(request))
 
-	
+"""
+	To add events , (name, info, image(required=False))
+"""	
 
 def add_events(request,categoryid):
 	logged_in=False
@@ -212,7 +240,9 @@ def add_event_image(request,categoryid,eventid):
 			return render_to_response("add_event_image.html",locals(),context_instance=RequestContext(request))	
 	else:
 		raise Http404()
-
+"""
+	To edit event related information
+"""
 
 def edit_event(request,categoryid,eventid):
 	if request.user.is_authenticated():
@@ -237,6 +267,10 @@ def edit_event(request,categoryid,eventid):
 			
 	else:
 		raise Http404()
+
+"""
+	To edit( change/add ) event images
+"""
 
 def edit_event_image(request,categoryid,eventid):
 	if request.user.is_authenticated():
@@ -269,7 +303,9 @@ def edit_event_image(request,categoryid,eventid):
 	else:
 		raise Http404()
    
-
+"""
+	To delete event instance
+"""
 
 def delete_event(request,categoryid,eventid):
 	if request.user.is_authenticated():

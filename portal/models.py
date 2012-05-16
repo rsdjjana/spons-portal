@@ -26,6 +26,10 @@ class Event(models.Model):
 	def __unicode__(self):
 		return self.name
 
+"""
+	having separate class for image enables any number of images being made associated with each category and event
+"""
+
 class CategoryImage(models.Model):
 	name=models.CharField(max_length=1000)
 	image=models.ImageField(upload_to='/media/photos/',null=True,blank=True)
