@@ -125,7 +125,7 @@ def edit_category(request,categoryid):
 				category.name=inputs['name']
 				category.info=inputs['info']
 				category.save()
-				return HttpResponseRedirect('/edit_category/image/'+str(categoryid))
+				return HttpResponseRedirect('/')
 		else:
 			category=Category.objects.get(id=categoryid)
 			form=AddCategoryForm(initial={'name':category.name,'info':category.info})
@@ -135,7 +135,7 @@ def edit_category(request,categoryid):
 """
 	To edit(change/add if not added before) the category image
 """
-
+"""
 def edit_category_image(request,categoryid):
 	if request.user.is_authenticated():
 		category=Category.objects.get(id=categoryid)
@@ -167,6 +167,7 @@ def edit_category_image(request,categoryid):
 	else:
 		raise Http404()
 """
+"""
 	To delete the category model instance
 """
 	
@@ -180,6 +181,15 @@ def delete_category(request,categoryid):
 		return HttpResponseRedirect('/')
 	else:
 		raise Http404()
+
+def remove_category_image(request,categoryid,category_image_id):
+	if request.user.is_authenticated():
+		category_image=CategoryImage.objects.get(id=category_image_id)
+		category_image.delete()
+		return HttpResponseRedirect('/category/'+str(categoryid))
+	else:
+		raise Http404()
+	
 """
 	To veiw all the event under a particular category selected
 	The cores will be able to add,edit,delete event information
@@ -194,9 +204,13 @@ def view_events(request,categoryid):
 	category_image=CategoryImage.objects.filter(category=category)
 	return render_to_response("view_events.html",locals(),context_instance=RequestContext(request))
 
-def view_event_image(request,categoryid,eventid):
+def view_event_detail(request,categoryid,eventid):
+	logged_in=False
+	if request.user.is_authenticated():
+		logged_in=True
 	event=Event.objects.get(id=eventid)
-	event_image=EventImage.objects.filter(event=event)
+	category=Category.objects.get(id=categoryid)
+	event_images=EventImage.objects.filter(event=event)
 	return render_to_response("view_event_details.html",locals(),context_instance=RequestContext(request))
 
 """
@@ -233,7 +247,7 @@ def add_event_image(request,categoryid,eventid):
 					event_image=EventImage(name=request.FILES['image']._get_name(),event=event)
 					save_file(request.FILES['image'])
 					event_image.save()
-				return HttpResponseRedirect('/category/'+str(categoryid))
+				return HttpResponseRedirect('/event/detail/'+str(categoryid)+'/'+str(eventid))
 		else:
 			event=Event.objects.get(id=eventid)
 			form=AddImageForm()
@@ -255,7 +269,7 @@ def edit_event(request,categoryid,eventid):
 				event.info=inputs['info']
 				event.status=inputs['status']
 				event.save()
-			return HttpResponseRedirect("/edit_event/image/"+str(categoryid)+"/"+str(eventid))
+			return HttpResponseRedirect("/event/detail/"+str(categoryid)+'/'+str(eventid))
 		else:
 			event=Event.objects.get(id=eventid)
 			form=AddEventForm()
@@ -271,7 +285,7 @@ def edit_event(request,categoryid,eventid):
 """
 	To edit( change/add ) event images
 """
-
+"""
 def edit_event_image(request,categoryid,eventid):
 	if request.user.is_authenticated():
 		category=Category.objects.get(id=categoryid)
@@ -302,7 +316,7 @@ def edit_event_image(request,categoryid,eventid):
 			return render_to_response("edit_event_image.html",locals(),context_instance=RequestContext(request))
 	else:
 		raise Http404()
-   
+"""   
 """
 	To delete event instance
 """
@@ -314,6 +328,16 @@ def delete_event(request,categoryid,eventid):
 		event_image.delete()
 		event.delete()
 		return HttpResponseRedirect('/category/'+str(categoryid))
+	else:
+		raise Http404()
+"""
+	To remove a event image
+"""
+def remove_event_image(request,categoryid,eventid,event_image_id):
+	if request.user.is_authenticated():
+		event_image=EventImage.objects.get(id=event_image_id)
+		event_image.delete()
+		return HttpResponseRedirect('/event/detail/'+str(categoryid)+'/'+str(eventid))
 	else:
 		raise Http404()
 

@@ -21,6 +21,11 @@ STATUS_CHOICES=(
 ('Available','Available'),
 )
 
+IMAGE_CHOICES=(
+('Yes','Yes'),
+('No','No'),
+)
+
 class AddEventForm(forms.Form):
 	name=forms.CharField()
 	info=forms.CharField(widget=forms.Textarea)
