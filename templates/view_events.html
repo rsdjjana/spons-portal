@@ -11,14 +11,27 @@
 {% endfor %}
 {% if logged_in %}
 	</br>
-	<a href='/add_category_image/{{category.id}}/'>Add Image</a>
-<hr>
+	<a href='/add_category_image/{{category.id}}/'>Add Image</a></br>
+	<a href='/edit_category/{{category.id}}'> edit</a>  -->This if for editing the name and info about the topic</br>
+	<a href='/delete_category/{{category.id}}'> delete</a>  -->If there are any events inside this category they also will be deleted
 {% endif %}
+<hr>
+{% if not logged_in %}
+	{% if events %}
+		<h3><center>Events under {{category}}</center></h3>
+		<table border='1'>
+		<tr>
+		<th>Event name</th>
+		</tr>
+	{% endif %}
+{% else %}
+<b>Note:</b>If there are no events under the above mentioned topic, dont disturb the below mentioned "Add events" link
 <h3><center>Events under {{category}}</center></h3>
-<table border='1'>
-<tr>
-<th>Event name</th>
-</tr>
+		<table border='1'>
+		<tr>
+		<th>Event name</th>
+		</tr>
+{% endif %}
 {% for event in events %}
 <tr>
 <td><a href='/event/detail/{{category.id}}/{{event.id}}'>{{event.name}}</a></td>

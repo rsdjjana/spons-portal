@@ -178,6 +178,8 @@ def delete_category(request,categoryid):
 		category_image=CategoryImage.objects.filter(category=category)
 		category_image.delete()
 		category.delete()
+		events=Event.objects.filter(category=category)
+		events.delete()
 		return HttpResponseRedirect('/')
 	else:
 		raise Http404()

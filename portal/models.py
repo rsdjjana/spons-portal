@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 # Create your models here.
 
+STATUS_CHOICES=(
+('Sold','Sold'),
+('Available','Available'),
+)
+
 class UserProfile(models.Model):
 	user=models.ForeignKey(User)
 	phonenumber=models.CharField(max_length=40)
@@ -12,12 +17,9 @@ class Category(models.Model):
 	info=models.TextField(max_length=1500)
 	def __unicode__(self):
 		return self.name
-
-STATUS_CHOICES=(
-('Sold','Sold'),
-('Available','Available'),
-)	
-
+	class Meta:
+		ordering=['name']
+	
 class Event(models.Model):
 	name=models.CharField(max_length=100)
 	category=models.ForeignKey(Category)
@@ -25,6 +27,8 @@ class Event(models.Model):
 	status=models.CharField(max_length=10,choices=STATUS_CHOICES,default='Available')
 	def __unicode__(self):
 		return self.name
+	class Meta:
+		ordering=['name']
 
 """
 	having separate class for image enables any number of images being made associated with each category and event
