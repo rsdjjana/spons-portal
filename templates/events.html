@@ -1,0 +1,60 @@
+{% extends "home.html" %}
+{% block home %} {% endblock %}
+{% block index %}
+<table border='1'>
+<tr>
+<td><a href='/'>Home</a></td>
+<td> </td>
+<td> </td>
+<td><a href="/category/">Events</a><br/></td>
+<td>  </td>
+<td> </td>
+{% for topic in topics %}
+	<td><a href="/topic/{{topic.url_name}}/">{{topic.title}}</a></td>
+	<td>  </td>
+	<td>  </td>
+{% endfor %}
+</tr>
+</table>
+{% endblock %}
+<hr>
+{% block title %}Events under {{cleaned_category}}{% endblock %}
+{% block body %}
+<table border="1">
+	<tr>
+	<th>Event</th>
+	<th>Information</th>
+	<th>Current Status</th>
+	<th>Image</th></tr>
+	
+{% for i in events_list %}
+
+	<tr>
+	<td>{{i.title}}</td>
+	<td>{{i.about}}</td>
+	<td>
+	{% if i.status == "s" %}
+    	Sold
+    {% endif %}
+    {% if i.status == "a"%}
+    	Available
+    {% endif %}    
+    <td>
+    {% for j in photos_list %}
+        {% if j.event == i %}       
+            <img src="{{MEDIA_URL}}{{j.image}}" width="100px" height="100px" />
+        {% endif %}
+    {% endfor %}
+    </td>
+    </tr>
+<tr> </tr>    
+{% endfor %}
+</table>
+{% endblock %}
+
+
+{% block end %}
+<hr>
+<a href="/category/">Back</a><br/>
+{% endblock %}
+
