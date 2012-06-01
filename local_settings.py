@@ -14,7 +14,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'spons-portal9',                      # Or path to database file if using sqlite3.
+        'NAME': 'spons_portal4',                      # Or path to database file if using sqlite3.
         'USER': 'root',                      # Not used with sqlite3.
         'PASSWORD': 'JANa1993',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -24,18 +24,19 @@ DATABASES = {
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = '/home/janarthananr/spons-portal/media/photos/'
+# just change the path to spons_portal
+MEDIA_ROOT = '/home/janarthananr/Shaastra-2013-Website/media/'
 
-SITE_URL = 'http://127.0.0.1:8000/'
+SITE_URL = 'http://localhost:8000/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = 'http://127.0.0.1:8000/media/photos/'
+MEDIA_URL = '/media/'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	'/home/janarthananr/spons-portal/templates/',
+	'/home/janarthananr/Shaastra-2013-Website/templates/',
 )

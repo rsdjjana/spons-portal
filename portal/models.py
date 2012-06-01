@@ -1,50 +1,49 @@
-from django.db import models
-from django.contrib.auth.models import User
-from django.core.files.storage import FileSystemStorage
 # Create your models here.
+from django.db import models
+from django.contrib import admin
 
-STATUS_CHOICES=(
-('Sold','Sold'),
-('Available','Available'),
+#Allows for updating status of event
+STATUS_CHOICES = (
+    ('s', 'Sold'),
+    ('a', 'Available'),
 )
-
-class UserProfile(models.Model):
-	user=models.ForeignKey(User)
-	phonenumber=models.CharField(max_length=40)
-
 class Category(models.Model):
-	name=models.CharField(max_length=100)
-	info=models.TextField(max_length=1500)
-	def __unicode__(self):
-		return self.name
-	class Meta:
-		ordering=['name']
-	
+    name = models.CharField(max_length=30, unique=True)
+    url_name = models.CharField(max_length=30, blank=True)
+    
+    class Meta:
+    	verbose_name_plural = "categories"
+    	
+    def get_events(self):
+        return self.events.all()
+    get_events.short_description = 'Events'
+    
+    def __unicode__(self):
+        return self.name
+    
 class Event(models.Model):
-	name=models.CharField(max_length=100)
-	category=models.ForeignKey(Category)
-	info=models.TextField(max_length=1500)
-	status=models.CharField(max_length=10,choices=STATUS_CHOICES,default='Available')
-	def __unicode__(self):
-		return self.name
-	class Meta:
-		ordering=['name']
-
+    category = models.ForeignKey(Category, related_name = 'events')
+    title = models.CharField(max_length=30, unique=True)
+    about = models.TextField(null=True)
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='n')
+ 
+    def __unicode__(self):
+        return self.title
 """
-	having separate class for image enables any number of images being made associated with each category and event
+Image classes to add any number of
+images for a category/event
 """
-
+        
 class CategoryImage(models.Model):
-	name=models.CharField(max_length=1000)
-	image=models.ImageField(upload_to='/media/photos/',null=True,blank=True)
-	category=models.ForeignKey(Category)
-	def __unicode__(self):
-		return self.name
+    name=models.CharField(max_length=30, blank=True)
+    image=models.ImageField(upload_to='category',null=True,blank=True)
+    category=models.ForeignKey(Category, related_name = 'categoryimages')
+    def __unicode__(self):
+        return self.name
 
 class EventImage(models.Model):
-	name=models.CharField(max_length=1000)
-	image=models.ImageField(upload_to='/media/photos/',null=True,blank=True)
-	event=models.ForeignKey(Event)
-	def __unicode__(self):
-		return self.name
-
+    name=models.CharField(max_length=30, blank=True)
+    image=models.ImageField(upload_to='event',null=True,blank=True)
+    event=models.ForeignKey(Event, related_name = 'eventimages')
+    def __unicode__(self):
+        return self.name

@@ -1,23 +1,35 @@
 <html>
-<center> <h1> Welcome to Shaastra 2013 Spons Portal </h1> </center>
-
-<h3><b> Index</b></h3>
-<table>
-{% for category in categories %}
-	<tr>
-		<td><a href='/category/{{category.id}}'><b> <h3>{{category}}</h3>  </b></a></td>
-		
-	</tr> 
+<body>
+{% block home %}
+ <h1><center>Welcome to Shaastra 2013 Spons Portal</h1></center>
+{% endblock %}
+{% block index %}
+<table border='1'>
+<tr>
+<td><a href="/category/">Events</a><br/></td>
+<td>  </td>
+<td> </td>
+{% for topic in topics %}
+	<td><a href="/topic/{{topic.url_name}}/">{{topic.title}}</a></td>
+	{% for image in topic_images %}
+		{% if image.topic == topic %}
+			<td><img src="{{MEDIA_URL}}{{image.image}}" width="100px" height="100px" /></td>
+		{% endif %}
+	{% endfor %}
+<td>  </td>
+<td>  </td>
 {% endfor %}
+</tr>
 </table>
-{% if logged_in %}
-		<a href='/addcategory'>Add new topic</a>
-	</br>
-	{% endif %}
+{% endblock %}
 <hr>
-
-{% if logged_in %}
-<a href="/logout">LogOut</a><br/> 
-{% endif %}
-
+<h2><center>{% block title %} {% endblock %}</center></h2>
+{% block body %}
+<p> <center>Write about Shaastra </center></p>
+{% endblock %}
+{% block end%}
+<hr>
+{% endblock %}
+</body>
 </html>
+
